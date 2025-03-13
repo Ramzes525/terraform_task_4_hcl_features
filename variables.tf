@@ -1,0 +1,38 @@
+variable "prefix" {
+  default = "tfvmex"
+}
+
+variable "vm_count" {
+  default = 3
+}
+
+variable "network_interface_name" {
+  default = ["nic-1", "nic-2", "nic-3"]
+}
+
+variable "network_security_rule" {
+  type = list(object({
+    name                       = string
+    priority                   = number
+    direction                  = string
+    access                     = string
+    protocol                   = string
+    source_port_range          = string
+    destination_port_range     = string
+    source_address_prefix      = string
+    destination_address_prefix = string
+  }))
+  default = [
+    {
+      name                       = "task-4"
+      priority                   = 1000
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "80"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+  ]
+}
