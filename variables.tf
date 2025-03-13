@@ -10,7 +10,7 @@ variable "network_interface_names" {
   default = ["nic-1", "nic-2", "nic-3"]
 }
 
-variable "network_security_rule" {
+variable "network_security_rules" {
   type = list(object({
     name                       = string
     priority                   = number
