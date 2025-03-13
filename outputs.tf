@@ -3,8 +3,7 @@ output "vm_name_uppercase" {
 }
 
 output "vm_tags_to_connect" {
-  value = split(", ", join(", ", flatten([for vm in azurerm_virtual_machine.main :
-  join(", ", [for tag, value in vm.tags : "${tag}=${value}"])])))
+  value = join(", ", flatten([for vm in azurerm_virtual_machine.main : join(", ", [for tag, value in vm.tags : "${tag}=${value}"])]))
 }
 
 

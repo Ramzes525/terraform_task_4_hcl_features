@@ -33,13 +33,13 @@ resource "azurerm_network_security_group" "example" {
   dynamic "security_rule" {
     for_each = local.security_rule
     content {
-      name                    = network_security_rule.value.name
-      priority                = network_security_rule.value.priority
-      direction               = network_security_rule.value.direction
-      access                  = network_security_rule.value.access
-      protocol                = network_security_rule.value.protocol
-      source_port_range       = network_security_rule.value.source_port_range
-      destination_port_ranges = network_security_rule.value.destination_port_range
+      name                    = security_rule.value.name
+      priority                = security_rule.value.priority
+      direction               = security_rule.value.direction
+      access                  = security_rule.value.access
+      protocol                = security_rule.value.protocol
+      source_port_range       = security_rule.value.source_port_range
+      destination_port_ranges = security_rule.value.destination_port_range
     }
   }
 
