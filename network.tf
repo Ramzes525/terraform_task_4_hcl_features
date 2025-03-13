@@ -13,7 +13,7 @@ resource "azurerm_subnet" "internal" {
 }
 
 resource "azurerm_network_interface" "main" {
-  for_each            = toset(var.network_interface_name)
+  for_each            = toset(local.network_interface_name)
   name                = "${var.prefix}-nic-${each.value}"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -31,15 +31,17 @@ resource "azurerm_network_security_group" "example" {
   resource_group_name = azurerm_resource_group.example.name
 
   dynamic "security_rule" {
-    for_each = locals.security_rule
+    for_each = local.security_rule
     content {
-      name                    = security_rule.value.name
-      priority                = security_rule.value.priority
-      direction               = security_rule.value.direction
-      access                  = security_rule.value.access
-      protocol                = security_rule.value.protocol
-      source_port_range       = security_rule.value.source_port_range
-      destination_port_ranges = security_rule.value.destination_port_range
+      name                       = security_rule.value.name
+      priority                   = security_rule.value.priority
+      direction                  = security_rule.value.direction
+      access                     = security_rule.value.access
+      protocol                   = security_rule.value.protocol
+      source_port_range          = security_rule.value.source_port_range
+      destination_port_ranges    = security_rule.value.destination_port_range
+      source_address_prefix      = security_rule.value.source_address_prefix
+      destination_address_prefix = security_rule.value.destination_address_prefix
     }
   }
 
