@@ -6,7 +6,7 @@ variable "vm_count" {
   default = 3
 }
 
-variable "network_interface_name" {
+variable "network_interface_names" {
   default = ["nic-1", "nic-2", "nic-3"]
 }
 

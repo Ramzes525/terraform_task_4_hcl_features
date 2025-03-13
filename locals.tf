@@ -1,4 +1,4 @@
 locals {
-  network_interface_name = var.network_interface_name
+  network_interface_names = var.network_interface_names
   security_rule          = var.network_security_rule
 }

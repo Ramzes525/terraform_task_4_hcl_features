@@ -13,13 +13,13 @@ resource "azurerm_subnet" "internal" {
 }
 
 resource "azurerm_network_interface" "main" {
-  for_each            = toset(local.network_interface_name)
-  name                = "${var.prefix}-nic-${each.value}"
+  for_each            = toset(local.network_interface_names)
+  name                = "${var.prefix}-${each.value}"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
   ip_configuration {
-    name                          = "testconfiguration1-${each.value}"
+    name                          = "testconfiguration1"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
   }
